@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Browse a clean, responsive e-commerce product catalog with category filters, price range controls, ratings, and quick product details."
+    />
+    <title>E-Commerce Product Catalog | Modern Product Listing</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <input
+      class="theme-toggle-input"
+      type="checkbox"
+      id="theme-toggle"
+      aria-label="Use dark color theme"
+    />
+
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="E-Commerce Catalog home">
+          <span class="brand-mark" aria-hidden="true">C</span>
+          <span>Commerce Catalog</span>
+        </a>
+
+        <label class="theme-toggle" for="theme-toggle">
+          <span aria-hidden="true">Light</span>
+          <span class="toggle-track" aria-hidden="true">
+            <span class="toggle-thumb"></span>
+          </span>
+          <span aria-hidden="true">Dark</span>
+        </label>
+      </header>
+
+      <main>
+        <section class="catalog-hero" aria-labelledby="catalog-title">
+          <div>
+            <p class="eyebrow">Curated essentials</p>
+            <h1 id="catalog-title">Shop the latest everyday favorites</h1>
+            <p class="hero-copy">
+              Explore practical electronics, wardrobe staples, and learning picks in a responsive
+              product catalog built with semantic HTML and modern CSS.
+            </p>
+          </div>
+        </section>
+
+        <section class="catalog-layout" aria-label="Product catalog">
+          <aside class="filters-panel" aria-labelledby="filters-title">
+            <div class="filters-header">
+              <h2 id="filters-title">Filters</h2>
+              <button class="text-button" type="button">Reset</button>
+            </div>
+
+            <form class="filters-form">
+              <fieldset>
+                <legend>Category</legend>
+                <div class="chip-group" aria-label="Filter by category">
+                  <label class="chip">
+                    <input type="checkbox" name="category" value="electronics" checked />
+                    <span>Electronics</span>
+                  </label>
+                  <label class="chip">
+                    <input type="checkbox" name="category" value="clothing" />
+                    <span>Clothing</span>
+                  </label>
+                  <label class="chip">
+                    <input type="checkbox" name="category" value="books" />
+                    <span>Books</span>
+                  </label>
+                  <label class="chip">
+                    <input type="checkbox" name="category" value="home" />
+                    <span>Home</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Price range</legend>
+                <label class="range-label" for="price-range">
+                  <span>Maximum price</span>
+                  <strong>$750</strong>
+                </label>
+                <input
+                  id="price-range"
+                  class="price-range"
+                  type="range"
+                  name="price"
+                  min="25"
+                  max="1500"
+                  value="750"
+                  aria-describedby="price-help"
+                />
+                <div class="range-values" id="price-help">
+                  <span>$25</span>
+                  <span>$1,500</span>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Rating</legend>
+                <label class="rating-filter">
+                  <input type="checkbox" name="rating" value="4" checked />
+                  <span aria-label="Four stars and above">4.0+ stars</span>
+                </label>
+              </fieldset>
+            </form>
+          </aside>
+
+          <div class="products-area">
+            <div class="products-toolbar">
+              <div>
+                <h2>Featured products</h2>
+                <p>Showing 6 hand-picked items</p>
+              </div>
+              <label class="sort-control" for="sort-products">
+                <span>Sort by</span>
+                <select id="sort-products" name="sort-products">
+                  <option>Featured</option>
+                  <option>Price: Low to High</option>
+                  <option>Top Rated</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="product-grid">
+              <article class="product-card">
+                <a class="image-link" href="#product-modal" aria-label="View UltraBook Pro 15 details">
+                  <img
+                    src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80"
+                    alt="Silver laptop open on a clean desk"
+                  />
+                </a>
+                <div class="product-info">
+                  <p class="category-label">Electronics</p>
+                  <h3><a href="#product-modal">UltraBook Pro 15</a></h3>
+                  <p class="product-description">Slim performance laptop for work, study, and creative projects.</p>
+                  <div class="product-meta">
+                    <strong>$1,299.99</strong>
+                    <span class="rating" aria-label="Rated 4.8 out of 5 stars">4.8 ★</span>
+                  </div>
+                  <div class="card-actions">
+                    <a class="quick-view" href="#product-modal">Quick View</a>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card">
+                <a class="image-link" href="#product-modal" aria-label="View NoiseCancel X details">
+                  <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80"
+                    alt="Black wireless headphones against a bright background"
+                  />
+                </a>
+                <div class="product-info">
+                  <p class="category-label">Electronics</p>
+                  <h3><a href="#product-modal">NoiseCancel X</a></h3>
+                  <p class="product-description">Wireless headphones with rich sound and comfortable ear cushions.</p>
+                  <div class="product-meta">
+                    <strong>$249.99</strong>
+                    <span class="rating" aria-label="Rated 4.6 out of 5 stars">4.6 ★</span>
+                  </div>
+                  <div class="card-actions">
+                    <a class="quick-view" href="#product-modal">Quick View</a>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card">
+                <a class="image-link" href="#product-modal" aria-label="View Winter Parka details">
+                  <img
+                    src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=900&q=80"
+                    alt="Warm green winter jacket hanging on a wall"
+                  />
+                </a>
+                <div class="product-info">
+                  <p class="category-label">Clothing</p>
+                  <h3><a href="#product-modal">Winter Parka</a></h3>
+                  <p class="product-description">Insulated outerwear with a clean cut for cold-weather layering.</p>
+                  <div class="product-meta">
+                    <strong>$189.99</strong>
+                    <span class="rating" aria-label="Rated 4.3 out of 5 stars">4.3 ★</span>
+                  </div>
+                  <div class="card-actions">
+                    <a class="quick-view" href="#product-modal">Quick View</a>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card">
+                <a class="image-link" href="#product-modal" aria-label="View The Java Journey details">
+                  <img
+                    src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=80"
+                    alt="Stack of books on a wooden table"
+                  />
+                </a>
+                <div class="product-info">
+                  <p class="category-label">Books</p>
+                  <h3><a href="#product-modal">The Java Journey</a></h3>
+                  <p class="product-description">A practical guide for learning object-oriented programming concepts.</p>
+                  <div class="product-meta">
+                    <strong>$29.99</strong>
+                    <span class="rating" aria-label="Rated 4.7 out of 5 stars">4.7 ★</span>
+                  </div>
+                  <div class="card-actions">
+                    <a class="quick-view" href="#product-modal">Quick View</a>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card">
+                <a class="image-link" href="#product-modal" aria-label="View Ceramic Desk Lamp details">
+                  <img
+                    src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=80"
+                    alt="Modern desk lamp on a tidy workspace"
+                  />
+                </a>
+                <div class="product-info">
+                  <p class="category-label">Home</p>
+                  <h3><a href="#product-modal">Ceramic Desk Lamp</a></h3>
+                  <p class="product-description">Soft task lighting with a compact ceramic base for desks and shelves.</p>
+                  <div class="product-meta">
+                    <strong>$74.00</strong>
+                    <span class="rating" aria-label="Rated 4.5 out of 5 stars">4.5 ★</span>
+                  </div>
+                  <div class="card-actions">
+                    <a class="quick-view" href="#product-modal">Quick View</a>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card">
+                <a class="image-link" href="#product-modal" aria-label="View Canvas Weekender details">
+                  <img
+                    src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80"
+                    alt="Canvas travel bag placed on a light surface"
+                  />
+                </a>
+                <div class="product-info">
+                  <p class="category-label">Clothing</p>
+                  <h3><a href="#product-modal">Canvas Weekender</a></h3>
+                  <p class="product-description">Durable carryall with roomy storage for short trips and daily errands.</p>
+                  <div class="product-meta">
+                    <strong>$118.50</strong>
+                    <span class="rating" aria-label="Rated 4.4 out of 5 stars">4.4 ★</span>
+                  </div>
+                  <div class="card-actions">
+                    <a class="quick-view" href="#product-modal">Quick View</a>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 Commerce Catalog. Static frontend demo.</p>
+      </footer>
+
+      <section
+        class="product-modal"
+        id="product-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <a class="modal-backdrop" href="#" aria-label="Close product details"></a>
+        <article class="modal-content" tabindex="-1">
+          <a class="modal-close" href="#" aria-label="Close product details">&times;</a>
+          <img
+            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1000&q=80"
+            alt="Silver laptop open on a clean desk"
+          />
+          <div class="modal-details">
+            <p class="category-label">Electronics</p>
+            <h2 id="modal-title">UltraBook Pro 15</h2>
+            <p id="modal-description">
+              A lightweight productivity laptop with a crisp display, long battery life, and enough
+              power for everyday design, development, and business workflows.
+            </p>
+            <div class="product-meta modal-meta">
+              <strong>$1,299.99</strong>
+              <span class="rating" aria-label="Rated 4.8 out of 5 stars">4.8 ★</span>
+            </div>
+            <button class="cart-button modal-cart" type="button">Add to Cart</button>
+          </div>
+        </article>
+      </section>
+    </div>
+  </body>
+</html>
