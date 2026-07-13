@@ -9,3 +9,8 @@ target/
 # OS junk
 .DS_Store
 Thumbs.db
+
+# Local secrets (never commit)
+.env
+application-local.properties
+src/main/resources/application-local.properties
