@@ -1,0 +1,129 @@
+<section class="container page">
+  <div class="page-header">
+    <h1>Checkout</h1>
+    <p class="lede">Enter shipping details, choose a payment method, then simulate payment.</p>
+  </div>
+
+  <app-alert-message [message]="errorMessage" type="error" />
+  <app-alert-message [message]="successMessage" type="success" />
+
+  @if (loading) {
+    <app-loading-spinner message="Preparing checkout..." />
+  } @else {
+    @if (cart$ | async; as cart) {
+      @if (!cart.items.length) {
+        <app-empty-state
+          title="Nothing to checkout"
+          message="Add products to your cart before placing an order."
+          actionLabel="Browse products"
+          actionLink="/products"
+        />
+      } @else {
+        <div class="checkout-layout">
+          <form class="checkout-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+            <h2>Shipping address</h2>
+
+            <div class="grid-2">
+              <label>
+                Full name
+                <input type="text" formControlName="fullName" />
+                @if (form.controls.fullName.touched && form.controls.fullName.invalid) {
+                  <span class="field-error">Full name is required.</span>
+                }
+              </label>
+              <label>
+                Phone
+                <input type="tel" formControlName="phone" />
+                @if (form.controls.phone.touched && form.controls.phone.invalid) {
+                  <span class="field-error">Enter a valid phone number.</span>
+                }
+              </label>
+            </div>
+
+            <label>
+              Address line 1
+              <input type="text" formControlName="addressLine1" />
+              @if (form.controls.addressLine1.touched && form.controls.addressLine1.invalid) {
+                <span class="field-error">Address is required.</span>
+              }
+            </label>
+
+            <label>
+              Address line 2 (optional)
+              <input type="text" formControlName="addressLine2" />
+            </label>
+
+            <div class="grid-2">
+              <label>
+                City
+                <input type="text" formControlName="city" />
+                @if (form.controls.city.touched && form.controls.city.invalid) {
+                  <span class="field-error">City is required.</span>
+                }
+              </label>
+              <label>
+                State
+                <input type="text" formControlName="state" />
+                @if (form.controls.state.touched && form.controls.state.invalid) {
+                  <span class="field-error">State is required.</span>
+                }
+              </label>
+            </div>
+
+            <div class="grid-2">
+              <label>
+                Postal code
+                <input type="text" formControlName="postalCode" />
+                @if (form.controls.postalCode.touched && form.controls.postalCode.invalid) {
+                  <span class="field-error">Postal code is required.</span>
+                }
+              </label>
+              <label>
+                Country
+                <input type="text" formControlName="country" />
+                @if (form.controls.country.touched && form.controls.country.invalid) {
+                  <span class="field-error">Country is required.</span>
+                }
+              </label>
+            </div>
+
+            <h2>Payment simulation</h2>
+
+            <label>
+              Payment method
+              <select formControlName="paymentMethod">
+                @for (method of paymentMethods; track method) {
+                  <option [value]="method">{{ method }}</option>
+                }
+              </select>
+            </label>
+
+            <label class="checkbox">
+              <input type="checkbox" formControlName="simulateSuccess" />
+              Simulate successful payment
+            </label>
+
+            <button class="btn btn-primary btn-block" type="submit" [disabled]="submitting">
+              {{ submitting ? 'Placing order...' : 'Place order & pay' }}
+            </button>
+          </form>
+
+          <aside class="summary">
+            <h2>Cart summary</h2>
+            @for (item of cart.items; track item.cartItemId) {
+              <div class="row">
+                <span>{{ item.productName }} × {{ item.quantity }}</span>
+                <span>{{ item.lineTotal | currency }}</span>
+              </div>
+            }
+            <div class="row total">
+              <span>Subtotal</span>
+              <strong>{{ cart.subtotal | currency }}</strong>
+            </div>
+            <p class="note">Tax and discounts are calculated by the backend when the order is placed.</p>
+          </aside>
+        </div>
+      }
+    }
+  }
+</section>

@@ -14,3 +14,7 @@ Thumbs.db
 .env
 application-local.properties
 src/main/resources/application-local.properties
+
+# Generated / local-only artifacts
+effective-pom
+.cursor/

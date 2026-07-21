@@ -1,0 +1,62 @@
+<section class="container page">
+  <a routerLink="/orders" class="back-link">← Back to orders</a>
+
+  <app-alert-message [message]="errorMessage" type="error" />
+  <app-alert-message [message]="infoMessage" type="info" />
+
+  @if (loading) {
+    <app-loading-spinner message="Loading order..." />
+  } @else if (order) {
+    <article class="detail">
+      <header>
+        <div>
+          <p class="eyebrow">Order</p>
+          <h1>{{ order.orderNumber }}</h1>
+          <p>{{ order.createdAt | date: 'medium' }}</p>
+        </div>
+        <div class="status">
+          <span class="pill">{{ order.status }}</span>
+          <span class="pill soft">{{ order.paymentStatus }}</span>
+        </div>
+      </header>
+
+      <div class="items">
+        <h2>Items</h2>
+        @for (item of order.items; track item.productId + '-' + item.productName) {
+          <div class="row">
+            <div>
+              <strong>{{ item.productName }}</strong>
+              <p>{{ item.quantity }} × {{ item.unitPrice | currency }}</p>
+            </div>
+            <strong>{{ item.subtotal | currency }}</strong>
+          </div>
+        }
+      </div>
+
+      <aside class="totals">
+        <div class="row">
+          <span>Discount</span>
+          <span>{{ order.discountAmount | currency }}</span>
+        </div>
+        <div class="row">
+          <span>Tax</span>
+          <span>{{ order.taxAmount | currency }}</span>
+        </div>
+        <div class="row total">
+          <span>Total</span>
+          <strong>{{ order.totalAmount | currency }}</strong>
+        </div>
+
+        @if (payment) {
+          <div class="payment">
+            <h2>Payment</h2>
+            <p>Reference: {{ payment.paymentReference }}</p>
+            <p>Method: {{ payment.paymentMethod }}</p>
+            <p>Status: {{ payment.status }}</p>
+            <p>Amount: {{ payment.amount | currency }}</p>
+          </div>
+        }
+      </aside>
+    </article>
+  }
+</section>

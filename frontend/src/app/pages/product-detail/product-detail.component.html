@@ -1,0 +1,46 @@
+<section class="container page">
+  <a routerLink="/products" class="back-link">← Back to products</a>
+
+  <app-alert-message [message]="errorMessage" type="error" />
+  <app-alert-message [message]="successMessage" type="success" />
+
+  @if (loading) {
+    <app-loading-spinner message="Loading product..." />
+  } @else if (product) {
+    <article class="detail">
+      <div>
+        <p class="category">{{ product.category }}</p>
+        <h1>{{ product.name }}</h1>
+        <p class="price">{{ product.price | currency }}</p>
+        <p class="desc">{{ product.description || 'No description available.' }}</p>
+        <p class="stock" [class.out]="product.stockQuantity === 0">
+          {{ product.stockQuantity > 0 ? product.stockQuantity + ' in stock' : 'Out of stock' }}
+        </p>
+      </div>
+
+      <div class="panel">
+        <form [formGroup]="quantityForm" (ngSubmit)="addToCart()">
+          <label>
+            Quantity
+            <input type="number" formControlName="quantity" min="1" [max]="product.stockQuantity || 1" />
+          </label>
+          @if (quantityForm.controls.quantity.touched && quantityForm.controls.quantity.invalid) {
+            <span class="field-error">Enter a valid quantity within stock limits.</span>
+          }
+
+          <button
+            class="btn btn-primary btn-block"
+            type="submit"
+            [disabled]="saving || product.stockQuantity === 0"
+          >
+            {{ saving ? 'Updating...' : 'Add to cart' }}
+          </button>
+        </form>
+
+        <button class="btn btn-ghost btn-block" type="button" [disabled]="saving" (click)="toggleWishlist()">
+          {{ inWishlist ? 'Remove from wishlist' : 'Add to wishlist' }}
+        </button>
+      </div>
+    </article>
+  }
+</section>

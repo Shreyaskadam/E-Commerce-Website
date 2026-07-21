@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 
 /**
  * Single Product table with category enum.
- * Preferable to JPA inheritance of Electronics/Clothing/Book — simpler schema,
- * easier queries, and category-specific pricing lives in PricingService.
  */
 @Entity
 @Table(name = "products")

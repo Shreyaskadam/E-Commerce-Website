@@ -1,0 +1,56 @@
+.page-header {
+  margin-bottom: 1.25rem;
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+}
+
+.lede {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+}
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.wishlist-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.category {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}

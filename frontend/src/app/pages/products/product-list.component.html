@@ -1,0 +1,91 @@
+<section class="container page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Catalog</p>
+      <h1>Shop products</h1>
+      <p class="lede">Search and filter the live catalog from the Spring Boot API.</p>
+    </div>
+  </div>
+
+  <form class="filters" [formGroup]="filterForm" (ngSubmit)="loadProducts()">
+    <label>
+      Search
+      <input type="search" formControlName="name" placeholder="Product name" />
+    </label>
+
+    <label>
+      Category
+      <select formControlName="category">
+        <option value="">All categories</option>
+        @for (category of categories; track category) {
+          <option [value]="category">{{ category }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Min price
+      <input type="number" formControlName="minPrice" min="0" step="0.01" />
+    </label>
+
+    <label>
+      Max price
+      <input type="number" formControlName="maxPrice" min="0" step="0.01" />
+    </label>
+
+    <div class="filter-actions">
+      <button class="btn btn-primary" type="submit">Apply</button>
+      <button class="btn btn-ghost" type="button" (click)="resetFilters()">Reset</button>
+    </div>
+  </form>
+
+  <app-alert-message [message]="errorMessage" type="error" />
+  <app-alert-message [message]="successMessage" type="success" />
+
+  @if (loading) {
+    <app-loading-spinner message="Loading products..." />
+  } @else if (!products.length) {
+    <app-empty-state
+      title="No products found"
+      message="Try adjusting your search or filters."
+    />
+  } @else {
+    <div class="product-grid">
+      @for (product of products; track product.id) {
+        <article class="product-card">
+          <div class="meta">
+            <span class="category">{{ product.category }}</span>
+            <span class="stock" [class.out]="product.stockQuantity === 0">
+              {{ product.stockQuantity > 0 ? product.stockQuantity + ' in stock' : 'Out of stock' }}
+            </span>
+          </div>
+          <h2>
+            <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+          </h2>
+          <p class="desc">{{ product.description || 'No description available.' }}</p>
+          <div class="footer">
+            <strong>{{ product.price | currency }}</strong>
+            <div class="actions">
+              <button
+                type="button"
+                class="btn btn-ghost btn-sm"
+                [disabled]="actionProductId === product.id"
+                (click)="toggleWishlist(product)"
+              >
+                {{ isInWishlist(product.id) ? 'Saved' : 'Save' }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                [disabled]="product.stockQuantity === 0 || actionProductId === product.id"
+                (click)="addToCart(product)"
+              >
+                Add to cart
+              </button>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>

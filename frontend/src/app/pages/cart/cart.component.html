@@ -1,0 +1,84 @@
+<section class="container page">
+  <div class="page-header">
+    <h1>Shopping cart</h1>
+    <p class="lede">Quantities update instantly through the cart API.</p>
+  </div>
+
+  <app-alert-message [message]="errorMessage" type="error" />
+  <app-alert-message [message]="successMessage" type="success" />
+
+  @if (loading) {
+    <app-loading-spinner message="Loading cart..." />
+  } @else {
+    @if (cart$ | async; as cart) {
+      @if (!cart.items.length) {
+        <app-empty-state
+          title="Your cart is empty"
+          message="Browse the catalog and add products to get started."
+          actionLabel="Browse products"
+          actionLink="/products"
+        />
+      } @else {
+        <div class="cart-layout">
+          <div class="items">
+            @for (item of cart.items; track item.cartItemId) {
+              <article class="cart-item">
+                <div>
+                  <h2>
+                    <a [routerLink]="['/products', item.productId]">{{ item.productName }}</a>
+                  </h2>
+                  <p>{{ item.unitPrice | currency }} each</p>
+                </div>
+
+                <div class="qty">
+                  <button
+                    type="button"
+                    class="btn btn-ghost btn-sm"
+                    [disabled]="updatingItemId === item.cartItemId"
+                    (click)="decrease(item)"
+                  >
+                    −
+                  </button>
+                  <span>{{ item.quantity }}</span>
+                  <button
+                    type="button"
+                    class="btn btn-ghost btn-sm"
+                    [disabled]="updatingItemId === item.cartItemId"
+                    (click)="increase(item)"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <strong>{{ item.lineTotal | currency }}</strong>
+
+                <button
+                  type="button"
+                  class="btn btn-ghost btn-sm"
+                  [disabled]="updatingItemId === item.cartItemId"
+                  (click)="remove(item)"
+                >
+                  Remove
+                </button>
+              </article>
+            }
+          </div>
+
+          <aside class="summary">
+            <h2>Order summary</h2>
+            <div class="row">
+              <span>Items</span>
+              <span>{{ cart.totalItems }}</span>
+            </div>
+            <div class="row total">
+              <span>Subtotal</span>
+              <strong>{{ cart.subtotal | currency }}</strong>
+            </div>
+            <a routerLink="/checkout" class="btn btn-primary btn-block">Checkout</a>
+            <button type="button" class="btn btn-ghost btn-block" (click)="clear()">Clear cart</button>
+          </aside>
+        </div>
+      }
+    }
+  }
+</section>

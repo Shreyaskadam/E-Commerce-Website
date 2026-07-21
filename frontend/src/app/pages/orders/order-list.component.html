@@ -1,0 +1,37 @@
+<section class="container page">
+  <div class="page-header">
+    <h1>Order history</h1>
+    <p class="lede">Orders placed with your authenticated account.</p>
+  </div>
+
+  <app-alert-message [message]="errorMessage" type="error" />
+
+  @if (loading) {
+    <app-loading-spinner message="Loading orders..." />
+  } @else if (!orders.length) {
+    <app-empty-state
+      title="No orders yet"
+      message="When you complete checkout, your orders will appear here."
+      actionLabel="Start shopping"
+      actionLink="/products"
+    />
+  } @else {
+    <div class="orders">
+      @for (order of orders; track order.id) {
+        <article class="order-card">
+          <div>
+            <h2>
+              <a [routerLink]="['/orders', order.orderNumber]">{{ order.orderNumber }}</a>
+            </h2>
+            <p>{{ order.createdAt | date: 'medium' }}</p>
+          </div>
+          <div class="status">
+            <span class="pill">{{ order.status }}</span>
+            <span class="pill soft">{{ order.paymentStatus }}</span>
+          </div>
+          <strong>{{ order.totalAmount | currency }}</strong>
+        </article>
+      }
+    </div>
+  }
+</section>

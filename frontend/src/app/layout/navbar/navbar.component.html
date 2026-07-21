@@ -1,0 +1,34 @@
+<header class="nav">
+  <div class="nav-inner container">
+    <a routerLink="/products" class="brand">NovaMart</a>
+
+    <nav class="links" aria-label="Primary">
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+
+      @if (authService.currentUser$ | async; as user) {
+        <a routerLink="/cart" routerLinkActive="active">
+          Cart
+          @if (cart$ | async; as cart) {
+            @if (cart.totalItems > 0) {
+              <span class="badge">{{ cart.totalItems }}</span>
+            }
+          }
+        </a>
+        <a routerLink="/wishlist" routerLinkActive="active">
+          Wishlist
+          @if (wishlist$ | async; as wishlist) {
+            @if (wishlist.totalItems > 0) {
+              <span class="badge">{{ wishlist.totalItems }}</span>
+            }
+          }
+        </a>
+        <a routerLink="/orders" routerLinkActive="active">Orders</a>
+        <span class="user">{{ user.fullName }}</span>
+        <button type="button" class="btn btn-ghost" (click)="logout()">Logout</button>
+      } @else {
+        <a routerLink="/login" routerLinkActive="active">Login</a>
+        <a routerLink="/register" class="btn btn-primary btn-sm">Sign up</a>
+      }
+    </nav>
+  </div>
+</header>

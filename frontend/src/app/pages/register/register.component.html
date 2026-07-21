@@ -1,0 +1,43 @@
+<section class="auth-page container">
+  <div class="auth-card">
+    <h1>Create account</h1>
+    <p class="subtitle">Join NovaMart to shop, save favorites, and track orders.</p>
+
+    <app-alert-message [message]="errorMessage" type="error" />
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <label>
+        Full name
+        <input type="text" formControlName="fullName" autocomplete="name" />
+        @if (form.controls.fullName.touched && form.controls.fullName.invalid) {
+          <span class="field-error">Full name is required (max 100 characters).</span>
+        }
+      </label>
+
+      <label>
+        Email
+        <input type="email" formControlName="email" autocomplete="email" />
+        @if (form.controls.email.touched && form.controls.email.invalid) {
+          <span class="field-error">Enter a valid email address.</span>
+        }
+      </label>
+
+      <label>
+        Password
+        <input type="password" formControlName="password" autocomplete="new-password" />
+        @if (form.controls.password.touched && form.controls.password.invalid) {
+          <span class="field-error">Password must be at least 8 characters.</span>
+        }
+      </label>
+
+      <button class="btn btn-primary btn-block" type="submit" [disabled]="loading">
+        {{ loading ? 'Creating account...' : 'Sign up' }}
+      </button>
+    </form>
+
+    <p class="switch">
+      Already registered?
+      <a routerLink="/login">Sign in</a>
+    </p>
+  </div>
+</section>
